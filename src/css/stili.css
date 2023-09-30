@@ -1,0 +1,29 @@
+.tekstapp{
+    font-weight: bold;
+}
+
+.selectmenu{
+    height: 20px;
+}
+
+.formular{
+    text-align: left;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    width: 575px;
+    background-color:lightgoldenrodyellow;
+    border-style: solid;
+    border-width: 2px;
+}
+
+.simptomi{
+    width: 360px;
+}
+
+.graf{
+    vertical-align: top;
+    padding-left: 600;
+    width: 600px;
+}

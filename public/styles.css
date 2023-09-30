@@ -1,0 +1,26 @@
+.tekstapp{
+    font-weight: bold;
+}
+
+.selectmenu{
+    height: 20px;
+}
+
+.formular{
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 1%;
+}
+
+.graf{
+    vertical-align: top;
+    padding-left: 600;
+    width: 600px;
+}
+
+.uvod{
+    font-size: large;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    text-align:justify;
+}
