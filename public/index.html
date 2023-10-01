@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>3. DN :: OIS 2020/2021</title>
+  <title>Covid Symptom Tracker</title>
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="styles.css" rel="stylesheet">
   <style>
@@ -24,31 +24,19 @@
   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menujska-vrstica">
-          <span class="sr-only">Prikaži menu</span>
-          <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-        </button>
         <!-- ZAČETEK: Ime vaše aplikacije -->
         <a class="navbar-brand" href="index.html">Covid-19 Symptom Tracker</a>
         <!-- KONEC: Ime vaše aplikacije -->
-      </div>
-      <div class="collapse navbar-collapse" id="menujska-vrstica">
-        <ul class="nav navbar-nav">
-          <li><a href="opis.html">Opis ideje</a></li>
-          <li><a href="nacrt.html">Načrt informacijske rešitve</a></li>
-          <li><a href="#" onclick="generirajPodatke(1); generirajPodatke(2); generirajPodatke(3); prikaziEHR()">Generiranje podatkov</a></li>
-          <li><a href="https://ropsten.etherscan.io/address/0x16b0f64B6e2637B470D87360BEd2F79Ae86dA951">Blockchain certifikat kakovosti</a></li>
-        </ul>
       </div>
     </div>
   </nav>
   <!-- KONEC: Menujska vrstica na vrhu spletne strani -->
   
   <!-- ZAČETEK: Vsebina aplikacije -->
-  <div class="container" style="margin-top: 4rem;">
+  <div class="container">
     <div class="uvod">Pozdravljeni v naši aplikaciji Covid-19 Symptom Tracker. Aplikacija na podlagi vašega trenutnega zdravstvenega stanja izračuna riziko hujšega poteka okužbe z boleznijo SARS-CoV-19. Če v sistemu še niste registrirani, pritisnite na gumb REGISTRACIJA.</div>
     <main class="col-12 col-md-12" style="display: grid;" role="main">
-      <form id="prijavaStranke" style="padding-top: 1rem;">
+      <form action="login" id="prijavaStranke" style="padding-top: 1rem;">
         <div class="form-row row-cols-auto">
           <div class="col-md-6">
             <label for="email">Email:</label>
@@ -68,7 +56,7 @@
         </div>
       </form>
 
-      <form id="registracijaStranke" style="padding-top: 1rem; display: none;">
+      <form action="http://127.0.0.1:3306/" method="post" id="registracijaStranke" style="padding-top: 1rem; display: none;">
         <div class="form-row row-cols-auto">
           <div class="col-md-4">
             <label for="ime">Ime:</label>
@@ -97,7 +85,7 @@
         </div>
         <div class="form-row row-cols-auto">
           <div class="col-sm-12" style="padding-top: 1rem !important;">
-            <button type="submit" class="btn btn-primary-mb-2" onclick="vpisUporabnika()">Registracija</button>
+            <button id="regBtn" type="submit" class="btn btn-primary-mb-2">Registracija</button>
             <button type="button" class="btn btn-outline-primary" style="background-color: lightgreen !important;" onclick="changeForm2()">Prijava</button>
           </div>
         </div>
