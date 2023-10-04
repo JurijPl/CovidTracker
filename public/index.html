@@ -36,21 +36,21 @@
   <div class="container">
     <div class="uvod">Pozdravljeni v naši aplikaciji Covid-19 Symptom Tracker. Aplikacija na podlagi vašega trenutnega zdravstvenega stanja izračuna riziko hujšega poteka okužbe z boleznijo SARS-CoV-19. Če v sistemu še niste registrirani, pritisnite na gumb REGISTRACIJA.</div>
     <main class="col-12 col-md-12" style="display: grid;" role="main">
-      <form action="login" id="prijavaStranke" style="padding-top: 1rem;">
+      <form action="/profile" method="post" id="prijavaStranke" style="padding-top: 1rem;">
         <div class="form-row row-cols-auto">
           <div class="col-md-6">
             <label for="email">Email:</label>
-            <input type="email" class="form-control" id="emailLogin" placeholder="Vaš email naslov" required>
+            <input type="email" class="form-control" id="emailLogin" name="emailLogin" placeholder="Vaš email naslov" required>
           </div>
 
           <div class="col-md-6">
             <label for="password">Geslo:</label>
-            <input type="password" class="form-control" id="passwordLogin" placeholder="Vaše geslo" required>
+            <input type="password" class="form-control" id="passwordLogin" name="passwordLogin" placeholder="Vaše geslo" required>
           </div>
         </div>
         <div class="form-row row-cols-auto">
           <div class="col-sm-12" style="padding-top: 1rem !important;">
-            <button type="submit" class="btn btn-primary-mb-2" onclick="login()">Prijava</button>
+            <button id="loginBtn" type="submit" class="btn btn-primary-mb-2">Prijava</button>
             <button type="button" class="btn btn-outline-primary" style="background-color: lightgreen !important;" onclick="changeForm()">Registracija</button>
           </div>
         </div>

@@ -33,20 +33,35 @@ app.post('/', (req, res)=>{
     var starost=req.body.starost;
     var id=genEhrID();
     if(!validEmail(email)||!validPasswd(passwd)||starost<14|| ime==""|| priimek==""){
-        res.status(404).send();
+        res.sendFile(__dirname+'/public/index.html');
+        return;
     }
 
     var data=[id, email, passwd, ime, priimek, starost];
-
-    var person = conn.query("SELECT * FROM login WHERE email='"+email+"'", (err, res, fields)=>{
+    
+    /*var person = conn.query("SELECT * FROM login WHERE email='"+email+"'", (err, res, fields)=>{
         if(err) throw err;
         return res[0].email;
     });
-    console.log(person);
-
-    conn.query('INSERT INTO login (ehrId, email, passwd, ime, priimek, starost) VALUES (?,?,?,?,?,?)',
-    data, (err, res)=>{
+    console.log(person);*/
+    conn.query("SELECT * FROM login WHERE email='"+email+"'", (err, results)=>{
         if(err) throw err;
+        if(results.length>0) res.sendFile(__dirname+'/public/index.html');
+    });
+    
+    conn.query("INSERT IGNORE INTO login (ehrId, email, passwd, ime, priimek, starost) VALUES (?,?,?,?,?,?)",
+    data, (err, results)=>{
+        if(err) throw err;
+    });
+    res.sendFile(__dirname+'/public/profile.html');
+});
+
+app.post('/profile', (req, res)=>{
+    var email=req.body.emailLogin;
+    var password=req.body.passwordLogin;
+
+    conn.query("SELECT email, passwd FROM login WHERE email='"+email+"' AND passwd='"+password+"'", (err, results)=>{
+        if(err) throw err; 
     });
     res.sendFile(__dirname+'/public/profile.html');
 });
