@@ -7,36 +7,76 @@ function changeForm2(){
     document.getElementById("prijavaStranke").style.display="block";
 }
 
-function genEhrID() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-      return v.toString(16);
-    });
+var dataPoints=[];
+function dodajTocke(stTock, podatki) {
+  dataPoints=[];
+  var valX; 
+  var valY;
+  for(var i = 0; i < stTock; i++) {
+    valX = new Date(podatki[i].year + "-" + podatki[i].month + "-" + podatki[i].day);
+    valY = podatki[i].confirmed;
+    dataPoints.push({x: valX,y: valY});
+  }
+  var apigraf = new CanvasJS.Chart("chart2", {
+    theme: "light1",
+    animationEnabled: true,
+    zoomEnabled: true,
+    title: {
+        text: "Covid-19 sledilnik",
+        fontColor: "lightgreen"
+    },
+    subtitles:[
+        {
+            fontColor: "black",
+            text: "Potrjenih primerov na teden",
+        },
+    ],
+    axisX:{
+        valueFormatString: "YYYY-MM" ,
+        labelAngle: -50
+    },
+    axisY: {
+        valueFormatString: "###",
+        title: "Potrjenih okuženih",
+        titleFontColor: "black"
+    },
+    data: [{
+        type: "area",
+        lineColor:"blue",
+        dataPoints: dataPoints
+    }],
+  });
+  apigraf.render();
 }
 
-function validEmail(email){
-    return String(email)
-        .toLowerCase()
-        .match(
-            /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
-    );
-}
-function validPasswd(email){
-    return String(email)
-        .toLowerCase()
-        .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
-}
+window.addEventListener('load', function(){
+  $.ajax({
+    url: "https://api.sledilnik.org/api/stats-weekly",
+    type: "GET",
+    contentType: "application/json",
+    success: function(odgovor){
+        var podatki = odgovor;
+        console.log(odgovor);
+        dodajTocke(podatki.length, podatki);
+    },
+    error: function(napaka){
+        console.log(napaka);
+    }
+  })
+});
+
+
 
 /*const btn = document.getElementById('regBtn');
 btn.addEventListener('click', function(e){
+    e.preventDefault();
     var email=document.getElementById('email').value;
+    console.log(email);
     var passwd=document.getElementById('password').value;
     var ime=document.getElementById('ime').value
     var priimek=document.getElementById('priimek').value;
     var starost=document.getElementById('starost').value;
-    if(!validEmail(email)|| !validPasswd(passwd)||starost<14|| ime==""|| priimek=="") return;
+    //if(!validEmail(email)|| !validPasswd(passwd)||starost<14|| ime==""|| priimek=="") return;
 
     var stranka={
         id: genEhrID(),
@@ -46,6 +86,7 @@ btn.addEventListener('click', function(e){
         priimek: priimek,
         starost: starost
     }
+    console.log(stranka);
 
     fetch('/', {
         method: 'POST', 

@@ -8,14 +8,14 @@
   <style>
     body {padding-top: 70px;}
   </style>
-	</style><link rel="icon" href="public/favicon.png"/>
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="js/distance-util.js"></script>
-  <script type="text/javascript" src="index.js"></script>
+	</style><link rel="icon" href="favicon.png"/>
   <script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
-  <script type="text/javascript" src="js/leaflet-routing-machine.js"></script>
+  <script type="text/javascript" src="js/distance-util.js"></script>
+  <script type="text/javascript" src="index.js" defer></script>
   <script type="text/javascript" src="js/leaflet.js"></script>
+  <script type="text/javascript" src="js/leaflet-routing-machine.js"></script>
   <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -40,12 +40,12 @@
         <div class="form-row row-cols-auto">
           <div class="col-md-6">
             <label for="email">Email:</label>
-            <input type="email" class="form-control" id="email" placeholder="Vaš email naslov" required>
+            <input type="email" class="form-control" id="emailLogin" placeholder="Vaš email naslov" required>
           </div>
 
           <div class="col-md-6">
             <label for="password">Geslo:</label>
-            <input type="password" class="form-control" id="password" placeholder="Vaše geslo" required>
+            <input type="password" class="form-control" id="passwordLogin" placeholder="Vaše geslo" required>
           </div>
         </div>
         <div class="form-row row-cols-auto">
@@ -56,31 +56,31 @@
         </div>
       </form>
 
-      <form action="http://127.0.0.1:3306/" method="post" id="registracijaStranke" style="padding-top: 1rem; display: none;">
+      <form action="/" method="post" id="registracijaStranke" style="padding-top: 1rem; display: none;">
         <div class="form-row row-cols-auto">
           <div class="col-md-4">
             <label for="ime">Ime:</label>
-            <input type="text" class="form-control" id="ime" placeholder="Vpišite svoje ime" required>
+            <input type="text" class="form-control" id="ime" name="ime" placeholder="Vpišite svoje ime" required>
           </div>
           <div class="col-md-4">
             <label for="priimek">Priimek:</label>
-            <input type="text" class="form-control" id="priimek" placeholder="Vpišite svoj priimek" required>
+            <input type="text" class="form-control" id="priimek" name="priimek" placeholder="Vpišite svoj priimek" required>
           </div>
           <div class="col-md-4">
               <label for="starost">Starost (v letih):</label>
-              <input type="number" class="form-control" id="starost" placeholder="Vaša starost" required>
+              <input type="number" class="form-control" id="starost" name="starost" placeholder="Vaša starost" required>
           </div>
         </div>
   
         <div class="form-row row-cols-auto">
           <div class="col-md-6">
             <label for="email">Email:</label>
-            <input type="email" class="form-control" id="email" placeholder="Vaš email naslov" required>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Vaš email naslov" required>
           </div>
 
           <div class="col-md-6">
             <label for="password">Geslo:</label>
-            <input type="password" class="form-control" id="password" placeholder="Vaše geslo" required>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Vaše geslo" required>
           </div>
         </div>
         <div class="form-row row-cols-auto">
@@ -92,12 +92,10 @@
       </form>
     </main>
   </div>
-  <div class="container">
-    <div id="chart2"></div>
-    <div style="position:fixed; bottom: 0; text-align: center;">
+  <div class="container" id="chart2"></div>
+  <div class="container" style="position:fixed; bottom:0; width:100% !important;">
       Podrobne podatke o Covid-19, simptomih, in preprečevanju okužbe, si lahko preberete na <a href="https://www.who.int/health-topics/coronavirus#tab=tab_1">spletni strani WHO</a>
       Zahvaljujemo se vam za upoštevanje ukrepov, in upamo, da boste to počeli še naprej.
-    </div>
   </div>
   <!-- KONEC: Vsebina aplikacije -->
 
