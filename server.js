@@ -48,6 +48,8 @@ app.post('/', (req, res)=>{
         if(err) throw err;
         if(results.length>0) res.sendFile(__dirname+'/public/index.html');
     });
+
+    console.log("i get to here");
     
     conn.query("INSERT IGNORE INTO login (ehrId, email, passwd, ime, priimek, starost) VALUES (?,?,?,?,?,?)",
     data, (err, results)=>{
@@ -62,8 +64,13 @@ app.post('/profile', (req, res)=>{
 
     conn.query("SELECT email, passwd FROM login WHERE email='"+email+"' AND passwd='"+password+"'", (err, results)=>{
         if(err) throw err; 
+        console.log(results[0]);
+        if(results.length>0){
+            res.sendFile(__dirname+'/public/profile.html');
+        }else{
+            res.sendFile(__dirname+'/public/index.html');
+        }
     });
-    res.sendFile(__dirname+'/public/profile.html');
 });
 
 function genEhrID() {

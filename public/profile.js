@@ -51,24 +51,6 @@ function dodajTocke(stTock, podatki) {
   apigraf.render();
 }
 
-window.addEventListener('load', function(){
-  $.ajax({
-    url: "https://api.sledilnik.org/api/stats-weekly",
-    type: "GET",
-    contentType: "application/json",
-    success: function(odgovor){
-        var podatki = odgovor;
-        console.log(odgovor);
-        dodajTocke(podatki.length, podatki);
-    },
-    error: function(napaka){
-        console.log(napaka);
-    }
-  })
-});
-
-
-
 /*const btn = document.getElementById('regBtn');
 btn.addEventListener('click', function(e){
     e.preventDefault();

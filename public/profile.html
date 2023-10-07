@@ -10,12 +10,12 @@
   </style>
 	</style><link rel="icon" href="favicon.png"/>
   <script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
-  <script type="text/javascript" src="index.js"></script>
   <script type="text/javascript" src="js/distance-util.js"></script>
   <script type="text/javascript" src="js/leaflet.js"></script>
   <script type="text/javascript" src="js/leaflet-routing-machine.js"></script>
-  <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  <script type="text/javascript" src="profile.js"></script>
 
 </head>
 <body>
@@ -38,8 +38,38 @@
 
     <div class="container">
       <main class="col-12 col-md-12" style="display: grid;" role="main">
-        <form action="login" id="prijavaStranke" style="padding-top: 1rem;">
-          
+        <form action="" id="" style="padding-top: 1rem;">
+          <div class="form-row row-cols-auto">
+            <div class="col-md-6">
+              <label for="simptomi">Simptomi:</label>
+              <input type="text" class="form-control" id="simptomi" name="simptomi" placeholder="Vaši simptomi" required>
+            </div>
+
+            <div class="col-md-6">
+              <label for="vrocina">Vročina:</label>
+              <input type="number" class="form-control" id="vrocina" name="vrocina" placeholder="Vaša trenutna vročina" required>
+            </div>
+
+            <div class="col-md-6">
+              <select class="form-control" name="kadilec" id="kadilec">
+                <option disabled hidden selected>Ali kadite?</option>
+                <option value="redno">Da, redno</option>
+                <option value="obsacno">Da, občasno</option>
+                <option value="nikol">Ne kadim</option>
+              </select>
+            </div>
+  
+            <div class="col-md-6">
+              <label for="bolezni">Bolezni:</label>
+              <input type="text" class="form-control" id="bolezni" name="bolezni" placeholder="Vaše predhodne bolezni" required>
+            </div>
+          </div>
+          <div class="form-row row-cols-auto">
+            <div class="col-sm-12" style="padding-top: 1rem !important;">
+              <button id="loginBtn" type="submit" class="btn btn-primary-mb-2">Prijava</button>
+              <button type="button" class="btn btn-outline-primary" style="background-color: lightgreen !important;" onclick="changeForm()">Registracija</button>
+            </div>
+          </div>
         </form>
       </main>
     </div>
