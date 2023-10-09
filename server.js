@@ -5,6 +5,7 @@ const http = require('http');
 const port = process.env.PORT || 3000;
 const hostname = 'localhost';
 const bodyParser = require('body-parser');
+const expressSession=require('express-session');
 
 const conn = mysql2.createConnection({
     host: '127.0.0.1',
@@ -20,6 +21,14 @@ app.use(express.static(__dirname+'/src'));
 app.use(express.static(__dirname+'/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressSession({
+        secret: "123456789QWERTY", // Skrivni ključ za podpisovanje piškotov
+        saveUninitialized: true, // Novo sejo shranimo
+        resave: false, // Ne zahtevamo ponovnega shranjevanja
+        cookie: {
+          maxAge: 3600000, // Seja poteče po 1 h neaktivnosti
+        },
+}));
 
 app.get('/', function(req, res){
     res.sendFile(__dirname+'/public/index.html');
@@ -66,12 +75,28 @@ app.post('/profile', (req, res)=>{
         if(err) throw err; 
         console.log(results[0]);
         if(results.length>0){
+            req.session.user={email, password};
+            console.log(req.session);
             res.sendFile(__dirname+'/public/profile.html');
         }else{
             res.sendFile(__dirname+'/public/index.html');
         }
     });
 });
+
+/*app.get('/get-user-data', (req, res)=>{
+    const mail=req.session.email;
+    if(mail){
+        res.json({email: mail});
+    }else{
+        res.status(404).json({error: 'User not authenticated'});
+    }
+});
+
+/*app.get('/logout', (req, res)=> {
+    req.session.destroy();
+    res.sendFile(__dirname+"/public/index.html");
+});*/
 
 function genEhrID() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
